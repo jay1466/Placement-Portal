@@ -1,0 +1,439 @@
+/* ==========================================
+   Resume Analyzer Page
+========================================== */
+
+.resume-page{
+    min-height:100vh;
+    background:#eef4ff;
+    padding:50px 20px;
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.resume-header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.resume-header h1{
+    font-size:46px;
+    font-weight:800;
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.resume-header p{
+    font-size:18px;
+    color:#64748b;
+}
+
+/* ==========================================
+   Upload Card
+========================================== */
+
+.resume-card{
+
+    max-width:800px;
+
+    margin:auto;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.10);
+
+}
+
+.resume-card h3{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+    color:#1e293b;
+
+}
+
+/* ==========================================
+   File Input
+========================================== */
+
+.resume-card input[type="file"]{
+
+    width:100%;
+
+    padding:18px;
+
+    border:2px dashed #2563eb;
+
+    border-radius:12px;
+
+    margin-bottom:25px;
+
+    background:#f8fbff;
+
+    cursor:pointer;
+
+}
+
+.resume-card input[type="file"]:hover{
+
+    background:#eef5ff;
+
+}
+
+/* ==========================================
+   Analyze Button
+========================================== */
+
+.analyze-btn{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.analyze-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(37,99,235,.35);
+
+}
+
+/* ==========================================
+   Resume Score
+========================================== */
+
+.score-card{
+
+    margin-top:35px;
+
+    background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+
+    border:2px solid #22c55e;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-align:center;
+
+    animation:fadeIn .5s ease;
+
+}
+
+.score-card h2{
+
+    color:#2563eb;
+
+    font-size:30px;
+
+    margin-bottom:15px;
+
+    font-weight:700;
+
+}
+
+.score-card h1{
+
+    font-size:72px;
+
+    color:#16a34a;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+}
+
+.score-card p{
+
+    color:#555;
+
+    font-size:18px;
+
+}
+
+/* ==========================================
+   AI Recommended Companies
+========================================== */
+
+.match-section{
+
+    margin-top:45px;
+
+}
+
+.match-section h2{
+
+    color:#2563eb;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+}
+
+.match-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px;
+
+    margin-bottom:18px;
+
+    border-radius:16px;
+
+    background:#ffffff;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    border-left:6px solid #2563eb;
+
+    transition:.3s;
+
+}
+
+.match-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+.match-card h4{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#1e293b;
+
+    margin-bottom:8px;
+
+}
+
+.match-card p{
+
+    font-size:17px;
+
+    color:#555;
+
+    margin:0;
+
+}
+
+.match-percent{
+
+    color:#16a34a;
+
+    font-weight:700;
+
+    font-size:18px;
+
+    margin-left:10px;
+
+}
+
+.apply-match-btn{
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.apply-match-btn:hover{
+
+    background:#1d4ed8;
+
+    transform:scale(1.05);
+
+}
+
+/* ==========================================
+   Score Colors
+========================================== */
+
+.score-excellent{
+
+    color:#16a34a;
+
+}
+
+.score-good{
+
+    color:#2563eb;
+
+}
+
+.score-average{
+
+    color:#f59e0b;
+
+}
+
+.score-poor{
+
+    color:#dc2626;
+
+}
+
+/* ==========================================
+   Animation
+========================================== */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:768px){
+
+    .resume-header h1{
+
+        font-size:34px;
+
+    }
+
+    .resume-card{
+
+        padding:25px;
+
+    }
+
+    .score-card h1{
+
+        font-size:50px;
+
+    }
+
+    .match-card{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:20px;
+
+    }
+
+    .apply-match-btn{
+
+        width:100%;
+
+    }
+    /* ==========================================
+       Resume Analysis Cards
+    ========================================== */
+
+    .analysis-card{
+
+        margin-top:30px;
+
+        background:#ffffff;
+
+        padding:28px;
+
+        border-radius:18px;
+
+        box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    }
+
+    .analysis-card h2{
+
+        color:#2563eb;
+
+        font-size:28px;
+
+        margin-bottom:20px;
+
+        font-weight:700;
+
+    }
+
+    .analysis-card ul{
+
+        padding-left:25px;
+
+    }
+
+    .analysis-card li{
+
+        margin-bottom:12px;
+
+        font-size:17px;
+
+        color:#475569;
+
+        line-height:1.6;
+
+    }
+
+}

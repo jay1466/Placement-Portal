@@ -1,0 +1,187 @@
+/* =========================================
+   Global Styles
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    min-height: 100vh;
+}
+
+#root {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* =========================================
+   Headings
+========================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #212529;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #495057;
+    margin-bottom: 0;
+}
+
+/* =========================================
+   Links
+========================================= */
+
+a {
+    text-decoration: none;
+    color: #0d6efd;
+}
+
+a:hover {
+    color: #0a58ca;
+}
+
+/* =========================================
+   Navbar
+========================================= */
+
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+/* =========================================
+   Cards
+========================================= */
+
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   Buttons
+========================================= */
+
+.btn {
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* =========================================
+   Forms
+========================================= */
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+
+/* =========================================
+   Dashboard
+========================================= */
+
+.dashboard-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.dashboard-card:hover {
+    transform: scale(1.03);
+}
+
+.dashboard-card h4 {
+    font-size: 45px;
+}
+
+.dashboard-card h5 {
+    color: #212529;
+    margin-top: 10px;
+}
+
+.dashboard-card p {
+    color: #6c757d;
+}
+
+/* =========================================
+   Company Cards
+========================================= */
+
+.company-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.company-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   Tables
+========================================= */
+
+table {
+    background: white;
+}
+
+/* =========================================
+   Footer
+========================================= */
+
+/* Footer */
+footer {
+    margin-top: 60px;
+    background: #0d6efd;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+footer h5 {
+    color: white;
+    font-weight: bold;
+}
+
+footer p {
+    color: #f8f9fa;
+    margin: 0;
+}

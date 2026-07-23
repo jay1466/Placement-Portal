@@ -1,0 +1,63 @@
+.notification-page{
+
+    width:90%;
+
+    margin:40px auto;
+
+}
+
+.notification-page h2{
+
+    margin-bottom:30px;
+
+    font-weight:bold;
+
+}
+
+.notification-card{
+
+    background:white;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+    border-left:6px solid #2563eb;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.notification-card h4{
+
+    color:#2563eb;
+
+}
+
+.notification-card p{
+
+    margin:10px 0;
+
+}
+
+.notification-card small{
+
+    color:gray;
+
+}
+
+.empty-box{
+
+    background:white;
+
+    padding:40px;
+
+    text-align:center;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}

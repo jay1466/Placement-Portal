@@ -1,0 +1,28 @@
+/* Placement Portal Custom CSS */
+
+.hero {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+}
+
+.hero h1 {
+    color: #212529;
+    font-weight: bold;
+}
+
+.hero p {
+    color: #555;
+}
+
+.card {
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+footer {
+    margin-top: 50px;
+}
