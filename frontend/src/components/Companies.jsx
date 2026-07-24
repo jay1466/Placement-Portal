@@ -25,7 +25,7 @@ function Companies() {
             <div className="card shadow p-3 text-center">
 
               <img
-                src={`/uploads/${company.image}`}
+                src={company.image || "/default-company.png"}
                 alt={company.companyName}
                 style={{
                   height: "90px",

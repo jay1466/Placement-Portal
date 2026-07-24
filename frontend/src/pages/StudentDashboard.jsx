@@ -104,7 +104,7 @@ function StudentDashboard() {
                 <div className="company-image">
 
                   <img
-                    src={`${BACKEND_URL}/images/${company.image}`}
+                    src={company.image || "/default-company.png"}
                     alt={company.companyName}
                     className="company-logo"
                     onError={(e) => {
