@@ -21,9 +21,9 @@ public class ImageUploadController {
     private CloudinaryService cloudinaryService;
 
     @PostMapping("/image")
-    public ResponseEntity<Map<String, String>> uploadImage(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Map<String, String>> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
-            String url = cloudinaryService.uploadImage(file);
+            String url = cloudinaryService.uploadFile(file);
             Map<String, String> response = new HashMap<>();
             response.put("url", url);
             return ResponseEntity.ok(response);
