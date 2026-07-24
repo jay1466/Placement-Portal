@@ -31,5 +31,8 @@ public class User {
     @Column(name = "is_active")
     private boolean isActive = true;
 
+    @Column(name = "force_password_reset")
+    private boolean forcePasswordReset = false;
+
     // We can map Student or Recruiter here later if needed, but keeping it unidirectional from Student/Recruiter to User is also fine.
 }

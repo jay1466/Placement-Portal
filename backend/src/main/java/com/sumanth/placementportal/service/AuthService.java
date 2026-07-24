@@ -61,4 +61,40 @@ public class AuthService {
                 
         studentRepository.save(student);
     }
+
+    public com.sumanth.placementportal.dto.AuthResponse login(com.sumanth.placementportal.dto.LoginRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+
+        if (!user.isActive()) {
+            throw new IllegalArgumentException("Account is disabled");
+        }
+
+        // Generate dummy token for now, in a real app this would be a JWT
+        String token = "dummy-jwt-token-" + user.getId();
+
+        return com.sumanth.placementportal.dto.AuthResponse.builder()
+                .token(token)
+                .email(user.getEmail())
+                .role(user.getRole().name())
+                .forcePasswordReset(user.isForcePasswordReset())
+                .build();
+    }
+
+    public void resetPassword(com.sumanth.placementportal.dto.ResetPasswordRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Invalid old password");
+        }
+
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        user.setForcePasswordReset(false);
+        userRepository.save(user);
+    }
 }

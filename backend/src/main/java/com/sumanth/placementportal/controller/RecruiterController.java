@@ -1,77 +1,25 @@
 package com.sumanth.placementportal.controller;
 
-import com.sumanth.placementportal.dto.RecruiterRegisterRequest;
-import com.sumanth.placementportal.entity.Recruiter;
-import com.sumanth.placementportal.service.RecruiterService;
-
+import com.sumanth.placementportal.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/api/recruiters")
-@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/api/recruiter")
 public class RecruiterController {
 
     @Autowired
-    private RecruiterService recruiterService;
+    private CompanyService companyService;
 
-    // ================= REGISTER RECRUITER =================
-
-    @PostMapping("/register")
-    public Recruiter registerRecruiter(
-            @RequestBody RecruiterRegisterRequest request) {
-
-        return recruiterService.registerRecruiter(request);
+    // Recruiter submits updates to their company profile
+    @PostMapping("/company-update/{companyId}")
+    public ResponseEntity<?> submitCompanyUpdate(@PathVariable Long companyId, @RequestBody String jsonChanges) {
+        try {
+            companyService.submitCompanyUpdate(companyId, jsonChanges);
+            return ResponseEntity.ok("Company profile update submitted for admin approval.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
-
-    // ================= SAVE RECRUITER =================
-
-    @PostMapping
-    public Recruiter saveRecruiter(
-            @RequestBody Recruiter recruiter) {
-
-        return recruiterService.saveRecruiter(recruiter);
-    }
-
-    // ================= GET ALL RECRUITERS =================
-
-    @GetMapping
-    public List<Recruiter> getAllRecruiters() {
-
-        return recruiterService.getAllRecruiters();
-    }
-
-    // ================= GET RECRUITER BY ID =================
-
-    @GetMapping("/{id}")
-    public Optional<Recruiter> getRecruiterById(
-            @PathVariable Long id) {
-
-        return recruiterService.getRecruiterById(id);
-    }
-
-    // ================= UPDATE RECRUITER =================
-
-    @PutMapping("/{id}")
-    public Recruiter updateRecruiter(
-            @PathVariable Long id,
-            @RequestBody Recruiter recruiter) {
-
-        return recruiterService.updateRecruiter(id, recruiter);
-    }
-
-    // ================= DELETE RECRUITER =================
-
-    @DeleteMapping("/{id}")
-    public String deleteRecruiter(
-            @PathVariable Long id) {
-
-        recruiterService.deleteRecruiter(id);
-
-        return "Recruiter Deleted Successfully";
-    }
-
 }
