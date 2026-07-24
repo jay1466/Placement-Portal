@@ -5,29 +5,29 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "notifications")
+@Table(name = "interviews")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Notification {
+public class Interview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "application_id", nullable = false)
+    private Application application;
 
-    private String title;
+    @Column(nullable = false)
+    private LocalDateTime interviewDate; // Combines Date & Time
     
-    @Column(columnDefinition = "TEXT")
-    private String message;
-
-    private boolean isRead = false;
-    
-    private String type; // e.g., "DRIVE_PUBLISHED", "APPLICATION_UPDATE", "INTERVIEW_SCHEDULED"
+    private String mode; // e.g., "Online", "In-Person"
+    private String meetingLink;
+    private String venue;
+    private String roundName; // e.g., "Technical Round 1"
+    private String interviewerName;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

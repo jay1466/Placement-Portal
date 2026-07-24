@@ -1,36 +1,20 @@
 package com.sumanth.placementportal.controller;
 
-import com.sumanth.placementportal.entity.Student;
-import com.sumanth.placementportal.service.StudentProfileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/api/student")
-@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/api/student-profile")
 public class StudentProfileController {
-
-    @Autowired
-    private StudentProfileService studentProfileService;
-
-    @GetMapping("/profile/{id}")
-    public Student getProfile(
-            @PathVariable Long id){
-
-        return studentProfileService.getProfile(id);
-
+    // TODO: Refactor entirely in Phase 4
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProfile(@PathVariable Long id) {
+        throw new UnsupportedOperationException("Phase 4 refactoring");
     }
-
-    @PutMapping("/profile/{id}")
-    public Student updateProfile(
-            @PathVariable Long id,
-            @RequestBody Student student){
-
-        return studentProfileService.updateProfile(
-                id,
-                student
-        );
-
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProfile(@PathVariable Long id) {
+        throw new UnsupportedOperationException("Phase 4 refactoring");
     }
-
 }

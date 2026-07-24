@@ -26,21 +26,7 @@ public class PlacementDriveService {
     }
 
     public PlacementDrive updateDrive(Long id, PlacementDrive updatedDrive) {
-
-        PlacementDrive drive = placementDriveRepository.findById(id).orElse(null);
-
-        if (drive != null) {
-            drive.setDriveName(updatedDrive.getDriveName());
-            drive.setCompanyName(updatedDrive.getCompanyName());
-            drive.setJobRole(updatedDrive.getJobRole());
-            drive.setPackageLpa(updatedDrive.getPackageLpa());
-            drive.setEligibilityCgpa(updatedDrive.getEligibilityCgpa());
-            drive.setDriveDate(updatedDrive.getDriveDate());
-
-            return placementDriveRepository.save(drive);
-        }
-
-        return null;
+        throw new UnsupportedOperationException("Phase 3 refactoring");
     }
 
     public void deleteDrive(Long id) {

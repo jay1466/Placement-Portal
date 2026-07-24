@@ -16,54 +16,15 @@ public class UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     public User registerUser(User user) {
-
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("Email already exists");
-        }
-
-        user.setPassword(
-                passwordEncoder.encode(user.getPassword())
-        );
-
-        return userRepository.save(user);
+        throw new UnsupportedOperationException("Phase 2/3 refactoring");
     }
 
     public String login(String email, String password) {
-
-        User user = userRepository.findByEmail(email)
-                .orElse(null);
-
-        if (user != null &&
-                passwordEncoder.matches(password, user.getPassword())) {
-
-            return "Login Successful";
-        }
-
-        return "Invalid Email or Password";
+        throw new UnsupportedOperationException("Phase 2/3 refactoring");
     }
 
     public User updateUser(Long id, User updatedUser) {
-
-        User user = userRepository.findById(id).orElse(null);
-
-        if (user != null) {
-
-            user.setUsername(updatedUser.getUsername());
-            user.setEmail(updatedUser.getEmail());
-
-            if (updatedUser.getPassword() != null &&
-                    !updatedUser.getPassword().isBlank()) {
-
-                user.setPassword(
-                        passwordEncoder.encode(updatedUser.getPassword())
-                );
-            }
-            user.setRole(updatedUser.getRole());
-
-            return userRepository.save(user);
-        }
-
-        return null;
+        throw new UnsupportedOperationException("Phase 2/3 refactoring");
     }
 
     public void deleteUser(Long id) {

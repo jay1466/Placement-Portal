@@ -4,36 +4,23 @@ import com.sumanth.placementportal.entity.Notification;
 import com.sumanth.placementportal.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class NotificationService {
-
     @Autowired
-    private NotificationRepository repository;
+    private NotificationRepository notificationRepository;
 
-    public Notification createNotification(Long studentId,
-                                           String title,
-                                           String message){
-
-        Notification notification = new Notification();
-
-        notification.setStudentId(studentId);
-        notification.setTitle(title);
-        notification.setMessage(message);
-        notification.setRead(false);
-        notification.setCreatedAt(LocalDateTime.now());
-
-        return repository.save(notification);
-
+    public Notification createNotification(Long studentId, String message) {
+        throw new UnsupportedOperationException("Phase 5 refactoring");
     }
 
-    public List<Notification> getNotifications(Long studentId){
-
-        return repository.findByStudentIdOrderByCreatedAtDesc(studentId);
-
+    public List<Notification> getNotificationsForStudent(Long studentId) {
+        throw new UnsupportedOperationException("Phase 5 refactoring");
     }
 
+    public void markAsRead(Long id) {
+        throw new UnsupportedOperationException("Phase 5 refactoring");
+    }
 }

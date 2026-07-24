@@ -1,75 +1,56 @@
 package com.sumanth.placementportal.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "placement_drives")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PlacementDrive {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String driveName;
-    private String companyName;
-    private String jobRole;
-    private Double packageLpa;
-    private Double eligibilityCgpa;
-    private String driveDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private String role; // Job Role
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String employmentType; // Internship, Full Time, Both
+    private String ctc;
+    private String stipend;
+    private String location;
+    private String workMode; // Remote, Hybrid, Onsite
+    private String bondDetails;
+    
+    private String jobDescriptionPdfUrl;
+    
+    @Column(columnDefinition = "TEXT")
+    private String hiringProcess;
+    
+    private String selectionRounds;
+    
+    private LocalDateTime applicationDeadline;
+    private String expectedJoiningDate;
+    private Integer numberOfOpenings;
+    
+    @Column(columnDefinition = "TEXT")
+    private String requiredSkills;
+    
+    @Column(columnDefinition = "TEXT")
+    private String preferredSkills;
 
-    public String getDriveName() {
-        return driveName;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private DriveStatus status = DriveStatus.DRAFT;
 
-    public void setDriveName(String driveName) {
-        this.driveName = driveName;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getJobRole() {
-        return jobRole;
-    }
-
-    public void setJobRole(String jobRole) {
-        this.jobRole = jobRole;
-    }
-
-    public Double getPackageLpa() {
-        return packageLpa;
-    }
-
-    public void setPackageLpa(Double packageLpa) {
-        this.packageLpa = packageLpa;
-    }
-
-    public Double getEligibilityCgpa() {
-        return eligibilityCgpa;
-    }
-
-    public void setEligibilityCgpa(Double eligibilityCgpa) {
-        this.eligibilityCgpa = eligibilityCgpa;
-    }
-
-    public String getDriveDate() {
-        return driveDate;
-    }
-
-    public void setDriveDate(String driveDate) {
-        this.driveDate = driveDate;
-    }
+    @OneToOne(mappedBy = "placementDrive", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private DriveEligibility eligibility;
 }

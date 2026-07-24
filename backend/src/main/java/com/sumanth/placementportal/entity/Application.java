@@ -1,122 +1,49 @@
 package com.sumanth.placementportal.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "applications")
+@Table(name = "applications", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"student_id", "placement_drive_id"})
+})
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Application {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "student_id")
-    private Long studentId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
 
-    @Column(name = "drive_id")
-    private Long driveId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "placement_drive_id", nullable = false)
+    private PlacementDrive placementDrive;
 
-    @Column(name = "application_status")
-    private String applicationStatus;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ApplicationStatus status = ApplicationStatus.APPLIED;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "applied_on", nullable = false)
+    private LocalDateTime appliedOn;
+    
+    @Column(name = "last_updated_on")
+    private LocalDateTime lastUpdatedOn;
 
-    private String email;
-
-    private String phone;
-
-    private String branch;
-
-    private Double cgpa;
-
-    @Column(name = "cover_letter", length = 2000)
-    private String coverLetter;
-
-    public Application() {
+    @PrePersist
+    protected void onCreate() {
+        appliedOn = LocalDateTime.now();
+        lastUpdatedOn = LocalDateTime.now();
     }
 
-    // ==========================
-    // Getters & Setters
-    // ==========================
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
-
-    public Long getDriveId() {
-        return driveId;
-    }
-
-    public void setDriveId(Long driveId) {
-        this.driveId = driveId;
-    }
-
-    public String getApplicationStatus() {
-        return applicationStatus;
-    }
-
-    public void setApplicationStatus(String applicationStatus) {
-        this.applicationStatus = applicationStatus;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getBranch() {
-        return branch;
-    }
-
-    public void setBranch(String branch) {
-        this.branch = branch;
-    }
-
-    public Double getCgpa() {
-        return cgpa;
-    }
-
-    public void setCgpa(Double cgpa) {
-        this.cgpa = cgpa;
-    }
-
-    public String getCoverLetter() {
-        return coverLetter;
-    }
-
-    public void setCoverLetter(String coverLetter) {
-        this.coverLetter = coverLetter;
+    @PreUpdate
+    protected void onUpdate() {
+        lastUpdatedOn = LocalDateTime.now();
     }
 }

@@ -1,98 +1,38 @@
 package com.sumanth.placementportal.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "recruiters")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Recruiter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String companyName;
-
-    private String phone;
-
-    private String website;
-
-    private String location;
-
-    private String designation;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-    public Recruiter() {
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
-    public Recruiter(Long id, String companyName, String phone,
-                     String website, String location,
-                     String designation, User user) {
+    @Column(name = "hr_name", nullable = false)
+    private String hrName;
 
-        this.id = id;
-        this.companyName = companyName;
-        this.phone = phone;
-        this.website = website;
-        this.location = location;
-        this.designation = designation;
-        this.user = user;
-    }
+    private String designation;
+    
+    private String phone;
+    
+    @Column(name = "linkedin_profile")
+    private String linkedinProfile;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    @Column(name = "is_first_login")
+    private boolean isFirstLogin = true;
 }
