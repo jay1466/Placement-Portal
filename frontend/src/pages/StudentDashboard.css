@@ -1,378 +1,98 @@
-/* ======================================
-   Student Dashboard
-====================================== */
+/* Student Dashboard Specific Styles */
 
-body{
-    background:#f5f7fb;
-    font-family:'Segoe UI',sans-serif;
+.progress-container {
+  padding: 1rem 0;
 }
 
-/* ======================================
-   Welcome Section
-====================================== */
-
-.welcome-section{
-    margin-bottom:45px;
+.progress-bar-bg {
+  width: 100%;
+  height: 12px;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.welcome-section h2{
-    color:#1f2937;
-    font-size:34px;
-    font-weight:700;
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), #60a5fa);
+  border-radius: 6px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.welcome-section p{
-    color:#6b7280;
-    font-size:17px;
-    margin-top:8px;
+.progress-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
-/* ======================================
-   Section Heading
-====================================== */
-
-.section-title{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:32px;
-    font-weight:700;
-    color:#1f2937;
-    margin-bottom:4px;
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.5rem;
 }
 
-.section-subtitle{
-    color:#6b7280;
-    font-size:16px;
-    margin:0;
+.full-width {
+  grid-column: span 2;
 }
 
-/* ======================================
-   Dashboard Cards
-====================================== */
-
-.dashboard-card{
-
-    background:#ffffff;
-
-    border-radius:20px;
-
-    padding:28px;
-
-    text-align:center;
-
-    height:100%;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-    transition:.35s;
-
-    border:1px solid #edf2f7;
-
+@media (max-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+  .full-width {
+    grid-column: span 1;
+  }
 }
 
-.dashboard-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 18px 45px rgba(0,0,0,.15);
-
+.file-upload-zone {
+  border: 2px dashed var(--border-color);
+  padding: 3rem 2rem;
+  text-align: center;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.01);
+  transition: all var(--transition-normal);
 }
 
-.dashboard-icon{
-
-    font-size:38px;
-
-    margin-bottom:15px;
-
+.file-upload-zone:hover {
+  border-color: var(--accent-primary);
+  background: rgba(59, 130, 246, 0.05);
 }
 
-.dashboard-card h3{
-
-    font-size:30px;
-
-    font-weight:700;
-
-    color:#1f2937;
-
+.file-upload-zone input[type="file"] {
+  color: var(--text-primary);
 }
 
-.dashboard-card p{
-
-    color:#6b7280;
-
-    margin-bottom:0;
-
+.status-badge {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* ======================================
-   Company Card
-====================================== */
-
-.company-card{
-
-    background:#fff;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    display:flex;
-
-    flex-direction:column;
-
-    height:100%;
-
-    border:1px solid #edf2f7;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-    transition:.35s;
-
+.status-applied {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
-.company-card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:0 20px 45px rgba(0,0,0,.16);
-
+.status-shortlisted {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
-/* ======================================
-   Company Image
-====================================== */
-
-.company-image{
-
-    width:100%;
-
-    height:200px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    overflow:hidden;
-
-    background:linear-gradient(135deg,#eef5ff,#ffffff);
-
-    border-bottom:1px solid #ececec;
-
-    padding:15px;
-
+.status-selected {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
-.company-logo{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:contain;
-
-    transition:.35s;
-
-}
-
-.company-card:hover .company-logo{
-
-    transform:scale(1.05);
-
-}
-
-/* ======================================
-   Card Body
-====================================== */
-
-.card-body{
-
-    padding:24px;
-
-}
-
-.company-title{
-
-    font-size:30px;
-
-    font-weight:700;
-
-    color:#1f2937;
-
-    text-align:center;
-
-    margin-bottom:15px;
-
-}
-
-.company-description{
-
-    text-align:center;
-
-    color:#6b7280;
-
-    font-size:16px;
-
-    line-height:1.6;
-
-    min-height:60px;
-
-    margin-bottom:25px;
-
-}
-
-/* ======================================
-   Company Badges
-====================================== */
-
-.company-meta{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-    margin-bottom:28px;
-
-}
-
-.meta-item{
-
-    flex:1;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:8px;
-
-    padding:11px;
-
-    background:#f4f7ff;
-
-    border-radius:12px;
-
-    color:#374151;
-
-    font-size:14px;
-
-    font-weight:600;
-
-}
-
-.meta-icon{
-
-    color:#4f46e5;
-
-    font-size:17px;
-
-}
-
-/* ======================================
-   View Button
-====================================== */
-
-.view-btn{
-
-    width:100%;
-
-    padding:13px;
-
-    background:#fff;
-
-    color:#4f46e5;
-
-    border:2px solid #4f46e5;
-
-    border-radius:12px;
-
-    font-size:16px;
-
-    font-weight:700;
-
-    transition:.3s;
-
-}
-
-.view-btn:hover{
-
-    background:#4f46e5;
-
-    color:#fff;
-
-}
-
-.arrow{
-
-    margin-left:8px;
-
-    font-size:18px;
-
-}
-
-/* ======================================
-   Refresh Button
-====================================== */
-
-.btn-outline-primary{
-
-    border-radius:30px;
-
-    padding:10px 24px;
-
-    font-weight:600;
-
-}
-
-/* ======================================
-   Responsive
-====================================== */
-
-@media(max-width:992px){
-
-    .company-image{
-
-        height:180px;
-
-    }
-
-}
-
-@media(max-width:768px){
-
-    .company-image{
-
-        height:160px;
-
-    }
-
-    .company-meta{
-
-        flex-direction:column;
-
-    }
-
-    .meta-item{
-
-        width:100%;
-
-    }
-
-    .company-title{
-
-        font-size:24px;
-
-    }
-
-    .section-title{
-
-        font-size:26px;
-
-    }
-
+.status-rejected {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }

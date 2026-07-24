@@ -1,185 +1,152 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import api from "../services/api";
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import authService from '../services/authService';
+import Input from '../components/common/Input';
+import Button from '../components/common/Button';
+import Card from '../components/common/Card';
+import './Login.css';
 
 function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('student');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  
+  // Force Password Reset State
+  const [needsReset, setNeedsReset] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
 
-    const navigate = useNavigate();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
 
-    const [role, setRole] = useState("student");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    try {
+      const response = await authService.login({ email, password });
+      
+      if (response.message === "Password reset required") {
+        setNeedsReset(true);
+        setLoading(false);
+        return;
+      }
 
-    const handleLogin = async () => {
+      const token = response.token || response.jwt || response;
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
 
-        if (!email || !password) {
-            alert("Please enter Email and Password");
-            return;
-        }
+      // Navigate based on role
+      if (role === 'student') navigate('/student-dashboard');
+      else if (role === 'recruiter') navigate('/recruiter-dashboard');
+      else navigate('/admin-dashboard');
 
-        try {
+    } catch (err) {
+      setError(err.response?.data?.message || err.response?.data || 'Login failed. Please check credentials.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            const response = await api.post("/auth/login", {
-                email,
-                password
-            });
+  const handlePasswordReset = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      const response = await authService.forcePasswordReset({ email, oldPassword: password, newPassword });
+      alert("Password updated successfully. Please login again.");
+      setNeedsReset(false);
+      setPassword('');
+      setNewPassword('');
+    } catch (err) {
+      setError(err.response?.data || 'Failed to update password.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            console.log("Login Response:", response.data);
-
-            // Supports both plain token and JSON response
-            const token =
-                response.data.token ||
-                response.data.jwt ||
-                response.data;
-
-            localStorage.setItem("token", token);
-            localStorage.setItem("role", role);
-
-            alert("Login Successful");
-
-            switch (role) {
-
-                case "student":
-                    navigate("/student-dashboard");
-                    break;
-
-                case "recruiter":
-                    navigate("/recruiter-dashboard");
-                    break;
-
-                case "admin":
-                    navigate("/admin-dashboard");
-                    break;
-
-                default:
-                    navigate("/");
-            }
-
-        } catch (error) {
-
-            console.error("Login Error:", error);
-
-            if (error.response) {
-
-                console.log("Status:", error.response.status);
-                console.log("Response:", error.response.data);
-
-                if (typeof error.response.data === "string") {
-
-                    alert(error.response.data);
-
-                } else if (error.response.data.message) {
-
-                    alert(error.response.data.message);
-
-                } else {
-
-                    alert(JSON.stringify(error.response.data, null, 2));
-
-                }
-
-            } else {
-
-                alert("Unable to connect to the server.");
-
-            }
-
-        }
-
-    };
-
-    return (
-
-        <div className="container mt-5">
-
-            <div className="row justify-content-center">
-
-                <div className="col-md-5">
-
-                    <div className="card shadow p-4">
-
-                        <h2 className="text-center mb-4">
-                            Login
-                        </h2>
-
-                        <div className="mb-3">
-                            <label className="form-label">Email</label>
-
-                            <input
-                                type="email"
-                                className="form-control"
-                                placeholder="Enter Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="form-label">Password</label>
-
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Enter Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="form-label">Login As</label>
-
-                            <select
-                                className="form-select"
-                                value={role}
-                                onChange={(e) => setRole(e.target.value)}
-                            >
-                                <option value="student">Student</option>
-                                <option value="recruiter">Recruiter</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-
-                        <button
-                            className="btn btn-primary w-100"
-                            onClick={handleLogin}
-                        >
-                            Login
-                        </button>
-
-                        <div className="text-center mt-3">
-
-                            <Link to="#">
-                                Forgot Password?
-                            </Link>
-
-                            <br />
-
-                            <span>
-                                Don't have an account?{" "}
-                            </span>
-
-                            <Link to="/student-register">
-                                Student Register
-                            </Link>
-
-                            <br />
-
-                            <Link to="/recruiter-register">
-                                Recruiter Register
-                            </Link>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+  return (
+    <div className="login-container animate-fade-in">
+      <div className="login-left">
+        <div className="login-brand">
+          <h1>Placement Portal</h1>
+          <p>Your gateway to premium career opportunities.</p>
         </div>
+        <div className="login-graphics">
+          <div className="graphic-circle"></div>
+          <div className="graphic-circle small"></div>
+        </div>
+      </div>
+      
+      <div className="login-right">
+        <Card className="login-card">
+          <h2 className="login-title">{needsReset ? 'Update Password' : 'Welcome Back'}</h2>
+          <p className="login-subtitle">
+            {needsReset ? 'For security reasons, please change your temporary password.' : 'Please enter your details to sign in.'}
+          </p>
 
-    );
+          {error && <div className="login-error">{error}</div>}
+
+          {!needsReset ? (
+            <form onSubmit={handleLogin}>
+              <div className="role-selector">
+                <button type="button" className={`role-btn ${role === 'student' ? 'active' : ''}`} onClick={() => setRole('student')}>Student</button>
+                <button type="button" className={`role-btn ${role === 'recruiter' ? 'active' : ''}`} onClick={() => setRole('recruiter')}>Recruiter</button>
+                <button type="button" className={`role-btn ${role === 'admin' ? 'active' : ''}`} onClick={() => setRole('admin')}>Admin</button>
+              </div>
+
+              <Input 
+                label="Email Address" 
+                type="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+                required 
+                placeholder="Enter your email" 
+              />
+              <Input 
+                label="Password" 
+                type="password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                required 
+                placeholder="Enter your password" 
+              />
+              
+              <Button type="submit" fullWidth disabled={loading} className="mt-4">
+                {loading ? 'Signing in...' : 'Sign In'}
+              </Button>
+            </form>
+          ) : (
+            <form onSubmit={handlePasswordReset}>
+               <Input 
+                label="New Password" 
+                type="password" 
+                value={newPassword} 
+                onChange={(e) => setNewPassword(e.target.value)} 
+                required 
+                placeholder="Enter new strong password" 
+              />
+              <Button type="submit" fullWidth disabled={loading} className="mt-4" variant="success">
+                {loading ? 'Updating...' : 'Update Password'}
+              </Button>
+              <Button type="button" fullWidth variant="secondary" className="mt-2" onClick={() => setNeedsReset(false)}>
+                Cancel
+              </Button>
+            </form>
+          )}
+
+          <div className="login-footer">
+            <p>Don't have an account?</p>
+            <div className="register-links">
+              <Link to="/student-register">Student Register</Link>
+              <span>•</span>
+              <Link to="/recruiter-register">Recruiter Register</Link>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  );
 }
 
 export default Login;
