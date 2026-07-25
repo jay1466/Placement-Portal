@@ -1,25 +1,27 @@
 .premium-card {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+
+.premium-card:hover {
+  box-shadow: var(--shadow-md);
 }
 
 .premium-card-header {
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border-color-light);
+  border-bottom: 1px solid var(--border-light);
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .premium-card-title {
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-primary);
   margin: 0;
@@ -27,5 +29,17 @@
 
 .premium-card-body {
   padding: 1.5rem;
-  flex: 1;
+}
+
+/* Utility for grid inside card */
+.premium-card-body .data-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .premium-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

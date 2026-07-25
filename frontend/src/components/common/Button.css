@@ -1,16 +1,16 @@
 .premium-btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  border: none;
-  outline: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
 }
 
 .premium-btn.full-width {
@@ -22,39 +22,42 @@
   cursor: not-allowed;
 }
 
+/* Variants */
 .premium-btn-primary {
-  background: linear-gradient(135deg, var(--accent-primary), #4f46e5);
-  color: white;
-  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+  background-color: var(--brand-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
 }
+
 .premium-btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+  background-color: var(--brand-primary-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .premium-btn-secondary {
-  background: var(--bg-secondary);
+  background-color: var(--bg-tertiary);
   color: var(--text-primary);
-  border: 1px solid var(--border-color);
-}
-.premium-btn-secondary:hover:not(:disabled) {
-  background: var(--border-color);
+  border: 1px solid var(--border-light);
 }
 
-.premium-btn-success {
-  background: linear-gradient(135deg, var(--accent-secondary), #059669);
-  color: white;
-  box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
-}
-.premium-btn-success:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+.premium-btn-secondary:hover:not(:disabled) {
+  background-color: var(--border-light);
 }
 
 .premium-btn-danger {
-  background: var(--danger);
+  background-color: var(--danger);
   color: white;
 }
+
 .premium-btn-danger:hover:not(:disabled) {
-  opacity: 0.9;
+  background-color: #dc2626;
+}
+
+.premium-btn-success {
+  background-color: var(--success);
+  color: white;
+}
+
+.premium-btn-success:hover:not(:disabled) {
+  background-color: #059669;
 }
