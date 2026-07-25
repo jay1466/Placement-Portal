@@ -8,6 +8,7 @@ import lombok.Data;
 public class AuthResponse {
     private String token;
     private String email;
+    private Long id;
     private String role;
     private boolean forcePasswordReset;
 }

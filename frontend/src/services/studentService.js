@@ -24,6 +24,10 @@ const studentService = {
   getApplications: async (studentId) => {
     const response = await api.get(`/applications/student/${studentId}`);
     return response.data;
+  },
+  getAllDrives: async () => {
+    const response = await api.get('/drives');
+    return response.data;
   }
 };
 

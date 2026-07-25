@@ -74,12 +74,18 @@ public class AuthService {
             throw new IllegalArgumentException("Account is disabled");
         }
 
+        Long entityId = user.getId();
+        if (user.getRole() == Role.STUDENT) {
+            entityId = studentRepository.findByUser(user).map(Student::getId).orElse(user.getId());
+        }
+
         // Generate dummy token for now, in a real app this would be a JWT
         String token = "dummy-jwt-token-" + user.getId();
 
         return com.sumanth.placementportal.dto.AuthResponse.builder()
                 .token(token)
                 .email(user.getEmail())
+                .id(entityId)
                 .role(user.getRole().name())
                 .forcePasswordReset(user.isForcePasswordReset())
                 .build();
