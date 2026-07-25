@@ -12,6 +12,6 @@ public interface RecruiterRepository extends JpaRepository<Recruiter, Long> {
 
     Optional<Recruiter> findByUser(User user);
 
-    Optional<Recruiter> findByCompanyName(String companyName);
+    Optional<Recruiter> findByCompanyCompanyName(String companyName);
 
 }
