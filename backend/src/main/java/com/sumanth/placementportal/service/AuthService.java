@@ -19,6 +19,9 @@ public class AuthService {
     private StudentRepository studentRepository;
 
     @Autowired
+    private com.sumanth.placementportal.repository.RecruiterRepository recruiterRepository;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
@@ -75,8 +78,15 @@ public class AuthService {
         }
 
         Long entityId = user.getId();
+        Long companyId = null;
         if (user.getRole() == Role.STUDENT) {
             entityId = studentRepository.findByUser(user).map(Student::getId).orElse(user.getId());
+        } else if (user.getRole() == Role.RECRUITER) {
+            java.util.Optional<com.sumanth.placementportal.entity.Recruiter> rec = recruiterRepository.findByUser(user);
+            entityId = rec.map(com.sumanth.placementportal.entity.Recruiter::getId).orElse(user.getId());
+            if (rec.isPresent() && rec.get().getCompany() != null) {
+                companyId = rec.get().getCompany().getId();
+            }
         }
 
         // Generate dummy token for now, in a real app this would be a JWT
@@ -86,6 +96,7 @@ public class AuthService {
                 .token(token)
                 .email(user.getEmail())
                 .id(entityId)
+                .companyId(companyId)
                 .role(user.getRole().name())
                 .forcePasswordReset(user.isForcePasswordReset())
                 .build();

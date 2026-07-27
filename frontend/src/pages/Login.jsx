@@ -36,6 +36,7 @@ function Login() {
       localStorage.setItem('token', token);
       localStorage.setItem('role', role);
       if (response.id) localStorage.setItem('userId', response.id);
+      if (response.companyId) localStorage.setItem('companyId', response.companyId);
 
       // Navigate based on role
       if (role === 'student') navigate('/student-dashboard');

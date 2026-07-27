@@ -9,6 +9,7 @@ public class AuthResponse {
     private String token;
     private String email;
     private Long id;
+    private Long companyId;
     private String role;
     private boolean forcePasswordReset;
 }
