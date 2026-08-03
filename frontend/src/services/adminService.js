@@ -21,6 +21,18 @@ const adminService = {
     const response = await api.post(`/companies/pending-changes/${id}/reject`);
     return response.data;
   },
+  getAllStudents: async () => {
+    const response = await api.get("/admin/students");
+    return response.data;
+  },
+  getAllCompanies: async () => {
+    const response = await api.get("/admin/companies");
+    return response.data;
+  },
+  getAllDrives: async () => {
+    const response = await api.get("/admin/drives");
+    return response.data;
+  }
 };
 
 export default adminService;

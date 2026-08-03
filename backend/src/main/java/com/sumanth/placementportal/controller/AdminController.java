@@ -50,4 +50,25 @@ public class AdminController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @Autowired
+    private com.sumanth.placementportal.service.StudentService studentService;
+
+    @Autowired
+    private com.sumanth.placementportal.service.PlacementDriveService placementDriveService;
+
+    @GetMapping("/students")
+    public ResponseEntity<?> getAllStudents() {
+        return ResponseEntity.ok(studentService.getAllStudents());
+    }
+
+    @GetMapping("/companies")
+    public ResponseEntity<?> getAllCompanies() {
+        return ResponseEntity.ok(companyService.getAllCompanies());
+    }
+
+    @GetMapping("/drives")
+    public ResponseEntity<?> getAllDrives() {
+        return ResponseEntity.ok(placementDriveService.getAllDrives());
+    }
 }
