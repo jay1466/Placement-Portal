@@ -4,6 +4,7 @@ import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 import { useNavigate } from 'react-router-dom';
+import './StudentDashboard.css';
 
 function StudentDashboard() {
   const navigate = useNavigate();

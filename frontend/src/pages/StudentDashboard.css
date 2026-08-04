@@ -1,98 +1,71 @@
-/* Student Dashboard Specific Styles */
+/* StudentDashboard.css - Light theme */
 
 .progress-container {
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 .progress-bar-bg {
   width: 100%;
-  height: 12px;
-  background: var(--bg-secondary);
-  border-radius: 6px;
+  height: 10px;
+  background: var(--bg-tertiary);
+  border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 1rem;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  margin-bottom: 0.75rem;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-primary), #60a5fa);
-  border-radius: 6px;
+  background: linear-gradient(90deg, var(--brand-primary), #10b981);
+  border-radius: 999px;
   transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress-text {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   font-weight: 500;
 }
 
-.profile-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 1.5rem;
-}
-
-.full-width {
-  grid-column: span 2;
-}
-
-@media (max-width: 768px) {
-  .profile-grid {
-    grid-template-columns: 1fr;
-  }
-  .full-width {
-    grid-column: span 1;
-  }
-}
-
 .file-upload-zone {
-  border: 2px dashed var(--border-color);
-  padding: 3rem 2rem;
+  border: 2px dashed var(--border-light);
+  padding: 2rem;
   text-align: center;
   border-radius: var(--radius-md);
-  background: rgba(255,255,255,0.01);
-  transition: all var(--transition-normal);
+  background: var(--bg-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .file-upload-zone:hover {
-  border-color: var(--accent-primary);
-  background: rgba(59, 130, 246, 0.05);
-}
-
-.file-upload-zone input[type="file"] {
-  color: var(--text-primary);
+  border-color: var(--brand-primary);
+  background: var(--brand-light);
 }
 
 .status-badge {
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .status-applied {
-  background: rgba(59, 130, 246, 0.15);
-  color: #60a5fa;
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: var(--info-bg);
+  color: var(--info);
 }
 
 .status-shortlisted {
-  background: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: var(--warning-bg);
+  color: var(--warning);
 }
 
 .status-selected {
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: var(--success-bg);
+  color: var(--success);
 }
 
 .status-rejected {
-  background: rgba(239, 68, 68, 0.15);
-  color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: var(--danger-bg);
+  color: var(--danger);
 }
