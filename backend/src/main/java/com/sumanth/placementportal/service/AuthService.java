@@ -65,6 +65,57 @@ public class AuthService {
         studentRepository.save(student);
     }
 
+    /**
+     * Direct registration without OTP — used by the frontend registration form.
+     * Creates a User with STUDENT role and a matching Student record.
+     */
+    public void registerStudentDirect(String email, String password, String username,
+                                       String branch, String phone,
+                                       Double cgpa, Integer graduationYear) {
+        if (userRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException("Email already registered. Please login instead.");
+        }
+
+        User user = User.builder()
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .role(Role.STUDENT)
+                .isEmailVerified(true)
+                .isActive(true)
+                .build();
+
+        user = userRepository.save(user);
+
+        // Derive enrollment number from email prefix (e.g. 21CS001@adit.ac.in → 21CS001)
+        // For non-@adit.ac.in emails, use the email prefix
+        String enrollmentNo = email.contains("@") ? email.substring(0, email.indexOf("@")) : email;
+
+        // Split username into first/last name
+        String firstName = username;
+        String lastName = "";
+        if (username != null && username.contains(" ")) {
+            int spaceIdx = username.indexOf(" ");
+            firstName = username.substring(0, spaceIdx);
+            lastName  = username.substring(spaceIdx + 1);
+        }
+
+        Student student = Student.builder()
+                .user(user)
+                .enrollmentNo(enrollmentNo)
+                .firstName(firstName)
+                .lastName(lastName)
+                .phone(phone)
+                .branch(branch)
+                .cgpa(cgpa)
+                .graduationYear(graduationYear)
+                .isProfileLocked(false)
+                .profileCompletionPercentage(0)
+                .build();
+
+        studentRepository.save(student);
+    }
+
+
     public com.sumanth.placementportal.dto.AuthResponse login(com.sumanth.placementportal.dto.LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
